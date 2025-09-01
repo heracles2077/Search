@@ -1,0 +1,37 @@
+# library_search.py
+
+library = [
+    {"title": "To Kill a Mockingbird", "author": "Harper Lee", "isbn": "9780061120084"},
+    {"title": "1984", "author": "George Orwell", "isbn": "9780451524935"},
+    {"title": "Pride and Prejudice", "author": "Jane Austen", "isbn": "9780141199078"},
+    {"title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "isbn": "9780743273565"},
+    {"title": "Moby Dick", "author": "Herman Melville", "isbn": "9781503280786"},
+]
+
+def search_library(keyword):
+    results = []
+    keyword_lower = keyword.lower()
+    for book in library:
+        if (keyword_lower in book["title"].lower() or
+            keyword_lower in book["author"].lower() or
+            keyword_lower in book["isbn"]):
+            results.append(book)
+    return results
+
+def main():
+    print("📚 Welcome to the Library Search System!")
+    while True:
+        query = input("\nEnter title, author, or ISBN to search (or type 'exit' to quit): ")
+        if query.lower() == "exit":
+            print("Goodbye!")
+            break
+        matches = search_library(query)
+        if matches:
+            print(f"\nFound {len(matches)} result(s):")
+            for book in matches:
+                print(f"- {book['title']} by {book['author']} (ISBN: {book['isbn']})")
+        else:
+            print("No matching books found.")
+
+if __name__ == "__main__":
+    main()
